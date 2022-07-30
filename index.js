@@ -2,30 +2,40 @@
 
 import chalk from "chalk";
 import { program } from "commander";
-import * as availableOptions from "./options.js";
-import { globalSearch } from "./helpers.js";
-
-console.log(chalk.bgBlue("✌️ Vim Cheat Sheet for Noobs"));
+import { globalSearch, getOptions } from "./helpers.js";
 
 program
-  .option("-b, --basics [term]", "Basic commands")
-  .option("-m, --modes [term]", "Mode selections")
+  .option("-i, --insert [term]", "Insert mode")
+  .option("-v, --visual [term]", "Visual mode")
+  .option("-V, --line [term]", "Visual-line mode")
+  .option("-^v, --block [term]", "Visual-block mode")
+  .option("-R, --replace [term]", "Replace mode")
+  .option("-n, --normal [term]", "Normal mode")
+  .option("-:, --command [term]", "Command-line mode")
   .parse();
 
 const options = program.opts();
 const passedOptions = Object.keys(options);
-const searchingGlobally = program.args.length;
+const isSearching = program.args.length;
+const searchTerm = program.args?.[0];
 
 if (!passedOptions.length) {
-  if (searchingGlobally) {
-    globalSearch(program.args[0]);
+  if (isSearching) {
+    globalSearch(searchTerm);
   } else {
-    // show welcome message / instructions? or list all commands by default?
-    availableOptions.basics();
-    availableOptions.modes();
+    console.log(
+      chalk.bgGreen.bold(" VIMCS "),
+      "Search and browse Vim commands straight from the terminal"
+    );
   }
 }
 
-passedOptions.map((currentOption) =>
-  availableOptions[currentOption](options[currentOption])
-);
+if (passedOptions.length) {
+  if (isSearching) {
+    passedOptions.map((currentOption) => getOptions(currentOption, searchTerm));
+  } else {
+    passedOptions.map((currentOption) =>
+      getOptions(currentOption, options[currentOption])
+    );
+  }
+}

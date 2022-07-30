@@ -1,4 +1,6 @@
-# The Vim Cheat Sheet
+# VIMCS
+
+#### Vim Cheat Sheet / Vim Convenient Search
 
 Features:
 - Search for commands
