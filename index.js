@@ -2,7 +2,7 @@
 
 import chalk from "chalk";
 import { program } from "commander";
-import { basics, modes } from "./options.js";
+import * as availableOptions from "./options.js";
 import { globalSearch } from "./helpers.js";
 
 console.log(chalk.bgBlue("✌️ Vim Cheat Sheet for Noobs"));
@@ -13,17 +13,17 @@ program
   .parse();
 
 const options = program.opts();
-const hasPassedOptions = Object.keys(options).length;
+const passedOptions = Object.keys(options);
 const searchingGlobally = program.args.length;
 
-if (!hasPassedOptions) {
+if (!passedOptions.length) {
   if (searchingGlobally) {
     globalSearch(program.args[0]);
   } else {
-    basics();
-    modes();
+    // show welcome message / instructions? or list all commands by default?
+    availableOptions.basics();
+    availableOptions.modes();
   }
 }
 
-if (options.basics) basics(options.basics);
-if (options.modes) modes(options.modes);
+passedOptions.map((option) => availableOptions[option](options[option]));
