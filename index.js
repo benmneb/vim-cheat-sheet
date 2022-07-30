@@ -26,4 +26,6 @@ if (!passedOptions.length) {
   }
 }
 
-passedOptions.map((option) => availableOptions[option](options[option]));
+passedOptions.map((currentOption) =>
+  availableOptions[currentOption](options[currentOption])
+);

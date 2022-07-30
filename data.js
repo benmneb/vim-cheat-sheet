@@ -3,14 +3,15 @@ export const basics = {
   ":q": "quit / exit",
   ":wq": "write and quit",
   ":q!": "quit without saving",
-  esc: "(escape key) cancels a multi-character command",
+  esc: "[escape key] cancels a multi-character command",
 };
 
 export const modes = {
-  ":i": "insert mode",
-  ":v": "visual mode",
-  ":V": "line visual mode (selected an entire line at a time)",
-  "^v": "(ctrl v) block visual mode (select code column by column)",
-  ":R": "replace mode",
-  esc: "(escape key) exit from current mode",
+  i: "insert mode",
+  v: "visual mode",
+  V: "visual line mode (select full lines)",
+  "^v": "[ctrl v] visual block mode (select a rectangular region)",
+  R: "replace mode",
+  esc: "[escape] normal mode",
+  ":": "command-line mode",
 };
