@@ -10,7 +10,7 @@ export const modes = {
   ":i": "insert mode",
   ":v": "visual mode",
   ":V": "line visual mode (selected an entire line at a time)",
-  "^v": "(crtl v) block visual mode (select code column by column)",
+  "^v": "(ctrl v) block visual mode (select code column by column)",
   ":R": "replace mode",
   esc: "(escape key) exit from current mode",
 };
