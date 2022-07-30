@@ -2,11 +2,19 @@ import { printLines, searchWithin } from "./helpers.js";
 import * as data from "./data.js";
 
 export function basics(term) {
-  if (typeof term === "string") {
+  if (term?.length) {
+    const result = printLines(searchWithin(data.basics, term));
+
+    if (!result) {
+      return console.log(`
+  No commands with "${term}" in Basics
+      `);
+    }
+
     return console.log(`
   Commands with "${term}" in Basics:
 
-    ${printLines(searchWithin(data.basics, term))}`);
+    ${result}`);
   }
 
   return console.log(`
@@ -16,11 +24,19 @@ export function basics(term) {
 }
 
 export function modes(term) {
-  if (typeof term === "string") {
+  if (term?.length) {
+    const result = printLines(searchWithin(data.modes, term));
+
+    if (!result) {
+      return console.log(`
+  No commands with "${term}" in Modes
+      `);
+    }
+
     return console.log(`
   Commands with "${term}" in Modes:
 
-    ${printLines(searchWithin(data.modes, term))}`);
+    ${result}`);
   }
 
   return console.log(`

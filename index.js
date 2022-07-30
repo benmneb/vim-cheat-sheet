@@ -16,10 +16,18 @@ const options = program.opts();
 
 if (!Object.keys(options).length) {
   if (program.args.length) {
-    console.log(`
-  Commands with "${program.args[0]}":
+    const term = program.args[0];
+    const result = printLines(searchEverything(term));
 
-    ${printLines(searchEverything(program.args[0]))}`);
+    if (!result) {
+      console.log(`
+  No commands with "${term}"`);
+    } else {
+      console.log(`
+  Commands with "${term}":
+
+    ${result}`);
+    }
   } else {
     basics();
     modes();
