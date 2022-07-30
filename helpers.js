@@ -19,11 +19,25 @@ export function searchWithin(data, term) {
   );
 }
 
-export function searchEverything(term) {
+function searchEverything(term) {
   const mergedData = Object.assign({}, ...Object.values(allData));
   return Object.fromEntries(
     Object.entries(mergedData).filter(
       ([key, value]) => key.includes(term) || value.includes(term)
     )
   );
+}
+
+export function globalSearch(term) {
+  const result = printLines(searchEverything(term));
+
+  if (!result) {
+    return console.log(`
+  No commands with "${term}"`);
+  }
+
+  return console.log(`
+  Commands with "${term}":
+
+    ${result}`);
 }

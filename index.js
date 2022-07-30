@@ -3,7 +3,7 @@
 import chalk from "chalk";
 import { program } from "commander";
 import { basics, modes } from "./options.js";
-import { printLines, searchEverything } from "./helpers.js";
+import { globalSearch } from "./helpers.js";
 
 console.log(chalk.bgBlue("✌️ Vim Cheat Sheet for Noobs"));
 
@@ -13,21 +13,12 @@ program
   .parse();
 
 const options = program.opts();
+const hasPassedOptions = Object.keys(options).length;
+const searchingGlobally = program.args.length;
 
-if (!Object.keys(options).length) {
-  if (program.args.length) {
-    const term = program.args[0];
-    const result = printLines(searchEverything(term));
-
-    if (!result) {
-      console.log(`
-  No commands with "${term}"`);
-    } else {
-      console.log(`
-  Commands with "${term}":
-
-    ${result}`);
-    }
+if (!hasPassedOptions) {
+  if (searchingGlobally) {
+    globalSearch(program.args[0]);
   } else {
     basics();
     modes();
