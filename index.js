@@ -2,16 +2,19 @@
 
 import chalk from "chalk";
 import { program } from "commander";
-import { globalSearch, getOptions } from "./helpers.js";
+import { globalSearch, getOptions, text } from "./helpers.js";
 
 program
-  .option("-i, --insert [term]", "Insert mode")
-  .option("-v, --visual [term]", "Visual mode")
-  .option("-V, --line [term]", "Visual-line mode")
-  .option("-^v, --block [term]", "Visual-block mode")
-  .option("-R, --replace [term]", "Replace mode")
   .option("-n, --normal [term]", "Normal mode")
-  .option("-:, --command [term]", "Command-line mode")
+  .option("-v, --visual [term]", "Visual mode")
+  .option("-V, --visual-line [term]", "Visual-line mode")
+  .option("-^v, --visual-block [term]", "Visual-block mode")
+  .option("-gh, --select [term]", "Select mode")
+  .option("-gH, --select-line [term]", "Select-line mode")
+  .option("-R, --replace [term]", "Replace mode")
+  .option("-:, --command-line [term]", "Command-line mode")
+  .option("-Q, --ex [term]", "Ex mode")
+  .option("-i, --insert [term]", "Insert mode")
   .parse();
 
 const options = program.opts();
@@ -24,8 +27,9 @@ if (!passedOptions.length) {
     globalSearch(searchTerm);
   } else {
     console.log(
-      chalk.bgGreen.bold(" VIMCS "),
-      "Search and browse Vim commands straight from the terminal"
+      `${text.primary(
+        "VIMCS"
+      )} Search and browse Vim commands straight from the terminal`
     );
   }
 }
